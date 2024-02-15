@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33712.159
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "shedule-app", "shedule-app\shedule-app.csproj", "{AB09CFC1-DF25-4A79-B9AA-AE388C67C1D9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AB09CFC1-DF25-4A79-B9AA-AE388C67C1D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB09CFC1-DF25-4A79-B9AA-AE388C67C1D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB09CFC1-DF25-4A79-B9AA-AE388C67C1D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB09CFC1-DF25-4A79-B9AA-AE388C67C1D9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {59F54093-AA2D-46C7-BE52-C2374CED06BA}
+	EndGlobalSection
+EndGlobal
