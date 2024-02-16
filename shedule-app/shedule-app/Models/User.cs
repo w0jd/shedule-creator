@@ -14,6 +14,7 @@ namespace shedule_app.Models
         public string UserEmail { get; set; }
         public byte[] PasswordHash { get; set; } = new byte[32];
         public byte[] PasswordSalt { get; set; } = new byte[32];
-        public ICollection<Task> Tasks { get; set; }
+
+        public ICollection<Tasks> Tasks { get; set; }
     }
 }
