@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "8UcdMIl3Dba8LoqESHrqc8AuzomNllQbFao22XcbOeQ=",
+  "Source": "shedule-app",
+  "BasePath": "_content/shedule-app",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
