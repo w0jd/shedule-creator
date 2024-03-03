@@ -26,6 +26,8 @@ namespace shedule_app.Controllers
                 PasswordHash = passwordHash,
                 PasswordSalt = passwordSalt
             };
+            _context.Users.Add(userCreate);
+            _context.SaveChanges();
             return new JsonResult(Ok(userCreate.UserName));
         }
         private void CreatePasswordHash(string password,
