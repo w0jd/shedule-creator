@@ -24,7 +24,8 @@ namespace shedule_app.Controllers
             DayOfWeek startOfWeek = DayOfWeek.Monday; // Określ początkowy dzień tygodnia
             int diff = (7 + (now.DayOfWeek - startOfWeek)) % 7;
             
-            var userName = User.FindFirst(ClaimTypes.Name).Value;
+            var userName = User?.FindFirst(ClaimTypes.Name).Value;
+
             var accountID = _context.Users.First(a => a.UserName == userName);
             DateTime startOfWeekDate = now.AddDays(-1 * diff).Date;
             DateOnly startOfweek = DateOnly.FromDateTime(startOfWeekDate);
@@ -32,6 +33,7 @@ namespace shedule_app.Controllers
             var week = _context.Tasks.Include(a=>a.Users).Where(a=>a.IdUser==accountID.IdUser && a.date >= startOfweek && a.date <= endOfWeek);
             return new JsonResult(Ok(week));
         }
+        [HttpPost]
         public JsonResult AddTask(Tasks task)
         {
             var userName = User.FindFirst(ClaimTypes.Name).Value;
