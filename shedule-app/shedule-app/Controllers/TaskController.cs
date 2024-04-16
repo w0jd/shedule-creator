@@ -50,6 +50,18 @@ namespace shedule_app.Controllers
             _context.SaveChanges();
             return new JsonResult(Ok());
         }
+        [HttpPost]
+        public JsonResult DeleteTask(int? taskId)
 
+        {
+            var task= _context.Tasks.Find( taskId);
+            _context.Tasks.Remove(task);
+            _context.SaveChanges();
+            var message = new
+            {
+                message = "task deleted"
+            };
+            return new JsonResult(Ok(message));
+        }
     }
 }
