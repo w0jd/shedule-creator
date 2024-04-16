@@ -5,6 +5,7 @@ using shedule_app.Data;
 using shedule_app.Models;
 using System;
 using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace shedule_app.Controllers
 {
@@ -57,11 +58,34 @@ namespace shedule_app.Controllers
             var task= _context.Tasks.Find( taskId);
             _context.Tasks.Remove(task);
             _context.SaveChanges();
+            
             var message = new
             {
                 message = "task deleted"
             };
             return new JsonResult(Ok(message));
+        }
+        [HttpPost]
+        public JsonResult FindTaskToEdit(int? taskId)
+        {
+            var task= _context.Tasks.Find(taskId);
+            return new JsonResult(Ok(task));
+
+
+        }
+        [HttpPost]
+        public JsonResult EditTask(Tasks task)
+        {
+            var forEdit = _context.Tasks.Find(task.TaskId);
+            forEdit.time = task.time;
+            forEdit.date=task.date;
+            forEdit.Description = task.Description;
+            forEdit.Name = task.Name;
+            _context.Tasks.Update(forEdit);
+            _context.SaveChanges();
+            return new JsonResult(Ok(task));
+
+
         }
     }
 }
