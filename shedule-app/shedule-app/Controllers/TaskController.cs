@@ -6,6 +6,7 @@ using shedule_app.Models;
 using System;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 
 namespace shedule_app.Controllers
 {
@@ -23,14 +24,13 @@ namespace shedule_app.Controllers
         {
             DateTime now = DateTime.Now;
             DayOfWeek startOfWeek = DayOfWeek.Monday; // Określ początkowy dzień tygodnia
-            int diff = (7 + (now.DayOfWeek - startOfWeek)) % 7;
-            
+            int diff = (7 + (now.DayOfWeek - startOfWeek)) % 7;          
             var userName = User?.FindFirst(ClaimTypes.Name).Value;
-
             var accountID = _context.Users.First(a => a.UserName == userName);
             DateTime startOfWeekDate = now.AddDays(-1 * diff).Date;
             DateOnly startOfweek = DateOnly.FromDateTime(startOfWeekDate);
             DateOnly endOfWeek = startOfweek.AddDays(6);
+            Response.Cookies.Append("beginingOfCurrentWeek", startOfweek.ToString());
             var week = _context.Tasks.Include(a=>a.Users).Where(a=>a.IdUser==accountID.IdUser && a.date >= startOfweek && a.date <= endOfWeek);
             return new JsonResult(Ok(week));
         }
@@ -57,8 +57,7 @@ namespace shedule_app.Controllers
         {
             var task= _context.Tasks.Find( taskId);
             _context.Tasks.Remove(task);
-            _context.SaveChanges();
-            
+            _context.SaveChanges();           
             var message = new
             {
                 message = "task deleted"
@@ -70,8 +69,6 @@ namespace shedule_app.Controllers
         {
             var task= _context.Tasks.Find(taskId);
             return new JsonResult(Ok(task));
-
-
         }
         [HttpPost]
         public JsonResult EditTask(Tasks task)
@@ -84,8 +81,6 @@ namespace shedule_app.Controllers
             _context.Tasks.Update(forEdit);
             _context.SaveChanges();
             return new JsonResult(Ok(task));
-
-
         }
     }
 }
