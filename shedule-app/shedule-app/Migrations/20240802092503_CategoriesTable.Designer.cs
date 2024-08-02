@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using shedule_app.Data;
 
@@ -10,9 +11,11 @@ using shedule_app.Data;
 namespace shedule_app.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240802092503_CategoriesTable")]
+    partial class CategoriesTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -102,7 +105,7 @@ namespace shedule_app.Migrations
             modelBuilder.Entity("shedule_app.Models.Tasks", b =>
                 {
                     b.HasOne("shedule_app.Models.Category", "Categories")
-                        .WithMany("Tasks")
+                        .WithMany()
                         .HasForeignKey("CategoriesIdCategory")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -116,11 +119,6 @@ namespace shedule_app.Migrations
                     b.Navigation("Categories");
 
                     b.Navigation("Users");
-                });
-
-            modelBuilder.Entity("shedule_app.Models.Category", b =>
-                {
-                    b.Navigation("Tasks");
                 });
 
             modelBuilder.Entity("shedule_app.Models.User", b =>

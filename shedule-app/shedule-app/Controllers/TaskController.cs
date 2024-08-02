@@ -7,6 +7,7 @@ using System;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace shedule_app.Controllers
 {
@@ -18,6 +19,7 @@ namespace shedule_app.Controllers
         public TaskController(ApplicationDbContext context)
         {
             _context = context;
+            
         }
         [HttpGet]
         public JsonResult showWeek()
@@ -33,6 +35,17 @@ namespace shedule_app.Controllers
             Response.Cookies.Append("beginingOfCurrentWeek", startOfweek.ToString());
             var week = _context.Tasks.Include(a=>a.Users).Where(a=>a.IdUser==accountID.IdUser && a.date >= startOfweek && a.date <= endOfWeek);
             return new JsonResult(Ok(week));
+            }
+
+        [HttpGet]
+        public JsonResult NewTaskFrom()
+        {
+
+            var userName = User?.FindFirst(ClaimTypes.Name).Value;
+            var accountID = _context.Users.First(a => a.UserName == userName);
+            var cat= _context.Users.Where(a=>a.IdUser== accountID.IdUser).Include(a=>a.Tasks).ThenInclude(a=>a.Categories).ToList();            
+            return new JsonResult(Ok(cat));
+
         }
         [HttpPost]
         public JsonResult AddTask(Tasks task)
