@@ -43,7 +43,7 @@ namespace shedule_app.Controllers
 
             var userName = User?.FindFirst(ClaimTypes.Name).Value;
             var accountID = _context.Users.First(a => a.UserName == userName);
-            var cat= _context.Users.Where(a=>a.IdUser== accountID.IdUser).Include(a=>a.Tasks).ThenInclude(a=>a.Categories).ToList();            
+            var cat= _context.Users.Where(a=>a.IdUser== accountID.IdUser).Include(a=>a.Tasks).ThenInclude(a=>a.TaskCategories).ThenInclude(a=>a.Categories).ToList();            
             return new JsonResult(Ok(cat));
 
         }

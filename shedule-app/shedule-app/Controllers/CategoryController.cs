@@ -25,7 +25,7 @@ namespace shedule_app.Controllers
         {
             var userName = User?.FindFirst(ClaimTypes.Name).Value;
             // var cat = _context.Categories.Include(a => a.Tasks);
-            var cat = _context.Users.Include(a => a.Tasks).ThenInclude(a=>a.Categories).Where(a => a.UserName == userName);
+            var cat = _context.Users.Include(a => a.Tasks).ThenInclude(a=>a.TaskCategories).ThenInclude(a=>a.Categories).Where(a => a.UserName == userName);
             return new JsonResult(Ok(cat));
             
         }

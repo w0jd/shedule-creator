@@ -18,12 +18,12 @@ namespace shedule_app.Models
         public DateOnly date { get; set; }
         [Required]
         public TimeOnly time { get; set; }
-        [ForeignKey("IdCategory")]
-        public int IdCategory { get; set; }
-        public Category Categories { get; set; }
-
+      
         [ForeignKey("IdUser")]
         public int IdUser { get; set; }
         public User Users { get; set; }
+        public ICollection<TaskCategory> TaskCategories { get; set; }
+
+
     }
 }

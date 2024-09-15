@@ -11,6 +11,6 @@ namespace shedule_app.Models
         public int IdCategory { get; set; }
         [Required]
         public string CategoryName { get; set; }
-        public ICollection<Tasks> Tasks { get; set; }
+        public ICollection<TaskCategory> TaskCategories { get; set; }
     }
 }
